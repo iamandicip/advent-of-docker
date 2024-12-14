@@ -21,10 +21,10 @@ func main() {
 		port = "8080"
 	}
 	// Required env var
-	secretMessage := getRequiredEnv("SECRET_MESSAGE")
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Secret message: %s", secretMessage)
-	})
+	// secretMessage := getRequiredEnv("SECRET_MESSAGE")
+	// http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	// 	fmt.Fprintf(w, "Secret message: %s", secretMessage)
+	// })
 	fmt.Printf("Listening on port %s\n", port)
 	http.ListenAndServe(":"+port, nil)
 }
