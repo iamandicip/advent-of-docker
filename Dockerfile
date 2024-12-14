@@ -1,5 +1,16 @@
-FROM golang
+# build stage
+FROM golang:latest AS builder
+
+WORKDIR /app
 COPY . .
-ARG IS_PRODUCTION=false
-RUN if [ "$IS_PRODUCTION" = "true" ]; then go build -o main main.go -ldflags "-s -w"; else go build -o main main.go; fi
+
+RUN go build -o main main.go
+
+# final stage
+FROM alpine:3.18
+
+WORKDIR /app
+COPY --from=builder /app/main .
+
+EXPOSE 8080
 CMD ["./main"]
